@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title">أعمالي الرقمية | واجهات تلفت الأنظار وتجارب تترك أثرًا</title>
+    <meta name="description" data-i18n="metaDescription" content="أصمم وأبرمج واجهات رقمية بروح فاخرة: هوية بصرية أنيقة، خطوط عربية مضبوطة، وأداء سريع بلا أطر ثقيلة.">
+
+    <!-- Google Fonts: Reem Kufi (العناوين) + Tajawal (النصوص) + Latin -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400..700&family=Tajawal:wght@200;300;400;500;700;800;900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Three.js (lightweight WebGL background) -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js" defer></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- خلفية صور المواقع المضافة -->
+    <div class="bg-slideshow" aria-hidden="true">
+        <div class="bg-slide" style="background-image:url('work-1.jpg')"></div>
+        <div class="bg-slide" style="background-image:url('work-2.jpg')"></div>
+        <div class="bg-slide" style="background-image:url('work-3.jpg')"></div>
+        <div class="bg-slide" style="background-image:url('work-4.jpg')"></div>
+        <div class="bg-slide" style="background-image:url('work-5.jpg')"></div>
+    </div>
+    <canvas id="three-canvas" class="three-canvas" aria-hidden="true" style="display:none"></canvas>
+    <div class="bg-logo" aria-hidden="true"></div>
+    <div class="background-gradient" aria-hidden="true"></div>
+    <div class="background-overlay" aria-hidden="true"></div>
+    <div class="background-glow" aria-hidden="true"></div>
+    <div class="glass-noise" aria-hidden="true"></div>
+
+    <!-- Loader -->
+    <div class="loader" id="loader" role="status" aria-live="polite">
+        <div class="loader-content">
+            <div class="loader-orb"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-ring-outer"></div>
+            <div class="loader-text" data-i18n="loaderText">معرض الأعمال</div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container" aria-label="التنقل الرئيسي">
+            <a href="#home" class="nav-logo">
+                <span class="logo-icon logo-photo logo-transparent">
+                    <img src="hadeel1.png" alt="هديل — شعار" width="56" height="56">
+                </span>
+                <span class="logo-text" data-i18n="brandName">معرض الأعمال</span>
+            </a>
+
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link" data-i18n="navHome">الرئيسية</a>
+                <a href="#portfolio" class="nav-link" data-i18n="navWorks">أعمال مختارة</a>
+                <a href="#portfolio" class="nav-link" data-i18n="navDetails">تفاصيل المشاريع</a>
+                <a href="#about" class="nav-link" data-i18n="navAbout">من أنا</a>
+                <a href="#skills" class="nav-link" data-i18n="navSkills">المهارات</a>
+                <a href="#process" class="nav-link" data-i18n="navProcess">طريقة العمل</a>
+                <a href="#contact" class="nav-link" data-i18n="navContact">تواصل</a>
+
+                <div class="nav-controls">
+                    <button class="control-btn theme-toggle" id="theme-toggle" type="button">
+                        <i class="fas fa-moon dark-icon" aria-hidden="true"></i>
+                        <i class="fas fa-sun light-icon" aria-hidden="true"></i>
+                        <span class="sr-only" data-i18n="themeToggle">تبديل الوضع الليلي والنهاري</span>
+                    </button>
+
+                    <button class="control-btn lang-toggle" id="lang-toggle" type="button">
+                        <span class="lang-code">AR</span>
+                        <span class="lang-sep" aria-hidden="true">/</span>
+                        <span class="lang-code">EN</span>
+                        <span class="sr-only" data-i18n="langToggle">تبديل اللغة بين العربية والإنجليزية</span>
+                    </button>
+                </div>
+            </div>
+
+            <button class="nav-toggle" id="nav-toggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ====== Hero ====== -->
+        <section class="hero" id="home">
+            <div class="hero-content container">
+                <div class="hero-text">
+                    <p class="hero-badge">
+                        <i class="fas fa-crown" aria-hidden="true"></i>
+                        <span data-i18n="heroBadge">تصميم إبداعي • فاخر • متميز</span>
+                    </p>
+                    <h1 class="hero-title">
+                        <span class="hero-title-line" data-i18n="heroTitle">أعمالي الرقمية</span>
+                        <span class="hero-title-accent" data-i18n="heroTitleAccent">واجهات تلفت الأنظار... وتجارب تترك أثرًا</span>
+                    </h1>
+                    <blockquote class="hero-quote">
+                        <i class="fas fa-quote-right hero-quote-icon" aria-hidden="true"></i>
+                        <p data-i18n="heroQuote">أصمم وأبرمج واجهات رقمية بروح فاخرة: هوية بصرية أنيقة، خطوط عربية مضبوطة، ألوان تجمع بين الذهب والعمق، وأداء سريع بلا أطر ثقيلة — من أول سطر كود حتى الاستضافة على الويب.</p>
+                    </blockquote>
+                    <div class="hero-actions">
+                        <a href="#portfolio" class="btn btn-primary">
+                            <span data-i18n="heroCtaPrimary">استعرض الأعمال المختارة</span>
+                            <i class="fas fa-arrow-left btn-arrow" aria-hidden="true"></i>
+                        </a>
+                        <a href="#contact" class="btn btn-ghost">
+                            <span data-i18n="heroCtaSecondary">تواصل معي</span>
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="hero-photo-frame">
+                        <img src="hadeel22.jpeg" alt="" width="1376" height="768" loading="eager" fetchpriority="high">
+                    </div>
+                    <div class="hero-cube">
+                        <div class="cube-face face-front"><i class="fas fa-gem"></i></div>
+                        <div class="cube-face face-back"></div>
+                        <div class="cube-face face-right"></div>
+                        <div class="cube-face face-left"></div>
+                        <div class="cube-face face-top"></div>
+                        <div class="cube-face face-bottom"></div>
+                    </div>
+                    <div class="hero-ring ring-one"></div>
+                    <div class="hero-ring ring-two"></div>
+                </div>
+            </div>
+
+            <a href="#portfolio" class="scroll-indicator" data-i18n-aria="scrollAria" aria-label="مرر للأسفل">
+                <span data-i18n="scrollText">مرر للأسفل</span>
+                <span class="scroll-mouse"><span class="scroll-wheel"></span></span>
+            </a>
+        </section>
+
+        <!-- ====== شريط الأخبار (نص متحرك) ====== -->
+        <div class="news-ticker" role="region" aria-label="شريط المعلومات">
+            <div class="ticker-viewport">
+                <div class="ticker-track">
+                    <div class="ticker-group">
+                        <span class="ticker-item" data-i18n="ticker1"><i class="fab fa-html5" aria-hidden="true"></i> HTML5</span>
+                        <span class="ticker-item" data-i18n="ticker2"><i class="fab fa-css3-alt" aria-hidden="true"></i> CSS3</span>
+                        <span class="ticker-item" data-i18n="ticker3"><i class="fab fa-js" aria-hidden="true"></i> JavaScript</span>
+                        <span class="ticker-item" data-i18n="ticker4"><i class="fas fa-cube" aria-hidden="true"></i> Three.js / WebGL</span>
+                        <span class="ticker-item" data-i18n="ticker5"><i class="fas fa-chart-simple" aria-hidden="true"></i> D3.js</span>
+                        <span class="ticker-item" data-i18n="ticker6"><i class="fas fa-mobile-screen" aria-hidden="true"></i> تصميم متجاوب</span>
+                        <span class="ticker-item" data-i18n="ticker7"><i class="fas fa-universal-access" aria-hidden="true"></i> Accessibility</span>
+                        <span class="ticker-item" data-i18n="ticker8"><i class="fas fa-language" aria-hidden="true"></i> واجهات ثنائية اللغة</span>
+                        <span class="ticker-item" data-i18n="ticker9"><i class="fas fa-bolt" aria-hidden="true"></i> تحسين الأداء</span>
+                        <span class="ticker-item" data-i18n="ticker10"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp API</span>
+                    </div>
+                    <div class="ticker-group" aria-hidden="true">
+                        <span class="ticker-item" data-i18n="ticker1"><i class="fab fa-html5" aria-hidden="true"></i> HTML5</span>
+                        <span class="ticker-item" data-i18n="ticker2"><i class="fab fa-css3-alt" aria-hidden="true"></i> CSS3</span>
+                        <span class="ticker-item" data-i18n="ticker3"><i class="fab fa-js" aria-hidden="true"></i> JavaScript</span>
+                        <span class="ticker-item" data-i18n="ticker4"><i class="fas fa-cube" aria-hidden="true"></i> Three.js / WebGL</span>
+                        <span class="ticker-item" data-i18n="ticker5"><i class="fas fa-chart-simple" aria-hidden="true"></i> D3.js</span>
+                        <span class="ticker-item" data-i18n="ticker6"><i class="fas fa-mobile-screen" aria-hidden="true"></i> تصميم متجاوب</span>
+                        <span class="ticker-item" data-i18n="ticker7"><i class="fas fa-universal-access" aria-hidden="true"></i> Accessibility</span>
+                        <span class="ticker-item" data-i18n="ticker8"><i class="fas fa-language" aria-hidden="true"></i> واجهات ثنائية اللغة</span>
+                        <span class="ticker-item" data-i18n="ticker9"><i class="fas fa-bolt" aria-hidden="true"></i> تحسين الأداء</span>
+                        <span class="ticker-item" data-i18n="ticker10"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp API</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="portfolio" id="portfolio">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-kicker" data-i18n="worksKicker">معرض المواقع</span>
+                    <h2 class="section-title">
+                        <span data-i18n="worksTitle">أعمال مختارة</span>
+                        <span class="section-title-en" data-i18n="worksTitleAlt">| Selected Works</span>
+                    </h2>
+                    <p class="section-desc" data-i18n="worksDesc">المواقع التي صممتها وطورتها فعليًا — لكل مشروع رابط مباشر لزيارته الحيّة.</p>
+                </div>
+
+                <div class="portfolio-grid">
+                    <!-- المشروع الأول -->
+                    <article class="portfolio-card card-large" data-project="1">
+                        <div class="card-media">
+                            <!-- لقطة شاشة حقيقية من الموقع المباشر -->
+                            <img src="work-1.jpg" alt="لقطة شاشة حقيقية من موقع شركة شموخ الخليج المثالي — لوجستيات وإمداد بالوقود" loading="eager" fetchpriority="high" width="1400" height="900">
+                            <div class="card-shine" aria-hidden="true"></div>
+                            <span class="card-index" aria-hidden="true">01</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-top">
+                                <span class="card-category" data-i18n="p1Cat">مواقع الشركات • الخدمات اللوجستية</span>
+                                <span class="card-year">2026</span>
+                            </div>
+                            <h3 class="card-title" data-i18n="p1Title">شموخ الخليج المثالي — الإمداد بالوقود</h3>
+                            <p class="card-desc" data-i18n="p1Desc">موقع مؤسسي لشركة خدمات لوجستية وإمداد بالديزل ومشتقات النفط في السعودية، مع تغطية لمناطق الخدمة ونموذج طلب عرض سعر متكامل عبر واتساب.</p>
+                            <div class="card-tech">
+                                <span class="tech-tag">HTML5</span>
+                                <span class="tech-tag">CSS3</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag" data-i18n="techResponsive">تصميم متجاوب</span>
+                            </div>
+                            <div class="card-actions">
+                                <a href="https://shomoukh2.pages.dev" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                                    <span data-i18n="visitSite">زيارة الموقع</span>
+                                </a>
+                                <button type="button" class="btn btn-outline btn-sm" data-open-project="1">
+                                    <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+                                    <span data-i18n="projectDetails">تفاصيل المشروع</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- المشروع الثاني -->
+                    <article class="portfolio-card" data-project="2">
+                        <div class="card-media">
+                            <!-- لقطة شاشة حقيقية من الموقع المباشر -->
+                            <img src="work-2.jpg" alt="لقطة شاشة حقيقية من مشروع العالم السحري — واقع معزز وذكاء اصطناعي للأطفال" loading="eager" width="1400" height="900">
+                            <div class="card-shine" aria-hidden="true"></div>
+                            <span class="card-index" aria-hidden="true">02</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-top">
+                                <span class="card-category" data-i18n="p2Cat">المشاريع الإبداعية • تجارب تفاعلية</span>
+                                <span class="card-year">2026</span>
+                            </div>
+                            <h3 class="card-title" data-i18n="p2Title">العالم السحري — AR + AI للأطفال</h3>
+                            <p class="card-desc" data-i18n="p2Desc">تجربة تعليمية تحوّل رسومات الأطفال إلى مجسمات ثلاثية الأبعاد تنبض بالحياة، بتقنيات الواقع المعزز والذكاء الاصطناعي، مع معرض بطاقات ولوحة تلوين تفاعلية.</p>
+                            <div class="card-tech">
+                                <span class="tech-tag">AR</span>
+                                <span class="tech-tag">AI</span>
+                                <span class="tech-tag">Web Audio</span>
+                                <span class="tech-tag">Canvas</span>
+                            </div>
+                            <div class="card-actions">
+                                <a href="https://alalmalzhry.pages.dev" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                                    <span data-i18n="visitSite">زيارة الموقع</span>
+                                </a>
+                                <button type="button" class="btn btn-outline btn-sm" data-open-project="2">
+                                    <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+                                    <span data-i18n="projectDetails">تفاصيل المشروع</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- المشروع الثالث -->
+                    <article class="portfolio-card" data-project="3">
+                        <div class="card-media">
+                            <!-- لقطة شاشة حقيقية من الموقع المباشر -->
+                            <img src="work-3.jpg" alt="لقطة شاشة حقيقية من موقع توريد مواد البناء — شموخ الخليج المثالي" loading="eager" width="1400" height="900">
+                            <div class="card-shine" aria-hidden="true"></div>
+                            <span class="card-index" aria-hidden="true">03</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-top">
+                                <span class="card-category" data-i18n="p3Cat">المواقع التعريفية • الخدمات اللوجستية</span>
+                                <span class="card-year">2026</span>
+                            </div>
+                            <h3 class="card-title" data-i18n="p3Title">شموخ الخليج المثالي — توريد مواد البناء</h3>
+                            <p class="card-desc" data-i18n="p3Desc">موقع تعريفي وتجاري لتوريد مواد البناء بالجملة: عرض منتجات بفلترة ذكية، معرض صور شامل، وأسئلة شائعة، مع نموذج طلب عرض سعر يُرسل مباشرة عبر واتساب.</p>
+                            <div class="card-tech">
+                                <span class="tech-tag">HTML5</span>
+                                <span class="tech-tag">CSS3</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag" data-i18n="techCatalog">كتالوج منتجات</span>
+                            </div>
+                            <div class="card-actions">
+                                <a href="https://shumukhbuilding.pages.dev" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                                    <span data-i18n="visitSite">زيارة الموقع</span>
+                                </a>
+                                <button type="button" class="btn btn-outline btn-sm" data-open-project="3">
+                                    <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+                                    <span data-i18n="projectDetails">تفاصيل المشروع</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- المشروع الرابع -->
+                    <article class="portfolio-card" data-project="4">
+                        <div class="card-media">
+                            <img src="work-4.jpg" alt="" aria-hidden="true" loading="lazy" width="1400" height="900">
+                            <div class="card-shine" aria-hidden="true"></div>
+                            <span class="card-index" aria-hidden="true">04</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-top">
+                                <span class="card-category" data-i18n="p4Cat">الضيافة الفندقية • مكة المكرمة</span>
+                                <span class="card-year">2026</span>
+                            </div>
+                            <h3 class="card-title" data-i18n="p4Title">شيخة للضيافة والفخامة — مكة المكرمة</h3>
+                            <p class="card-desc" data-i18n="p4Desc">موقع ضيافة فندقية قرب المسجد الحرام، يعرّف بالأجنحة والإطلالات ويوفر تجربة حجز تجريبية.</p>
+                            <div class="card-tech">
+                                <span class="tech-tag">HTML5</span>
+                                <span class="tech-tag">CSS3</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag" data-i18n="techResponsive">تصميم متجاوب</span>
+                            </div>
+                            <div class="card-actions">
+                                <a href="https://hoosptlmakh.lcfh277940.workers.dev/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                                    <span data-i18n="visitSite">زيارة الموقع</span>
+                                </a>
+                                <button type="button" class="btn btn-outline btn-sm" data-open-project="4">
+                                    <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+                                    <span data-i18n="projectDetails">تفاصيل المشروع</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- المشروع الخامس -->
+                    <article class="portfolio-card" data-project="5">
+                        <div class="card-media">
+                            <img src="work-5.jpg" alt="" aria-hidden="true" loading="lazy" width="1400" height="900">
+                            <div class="card-shine" aria-hidden="true"></div>
+                            <span class="card-index" aria-hidden="true">05</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-top">
+                                <span class="card-category" data-i18n="p5Cat">السيرة الذاتية • الذكاء الاصطناعي</span>
+                                <span class="card-year">2026</span>
+                            </div>
+                            <h3 class="card-title" data-i18n="p5Title">هديل عبدالقوي — السيرة الذاتية الرقمية</h3>
+                            <p class="card-desc" data-i18n="p5Desc">هوية رقمية وسيرة ذاتية تفاعلية تعرض نبذة هديل، مسارها الأكاديمي، مهاراتها ومشاريعها.</p>
+                            <div class="card-tech">
+                                <span class="tech-tag">HTML5</span>
+                                <span class="tech-tag">CSS3</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag" data-i18n="techResponsive">تصميم متجاوب</span>
+                            </div>
+                            <div class="card-actions">
+                                <a href="https://2mycv2.pages.dev/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                                    <span data-i18n="visitSite">زيارة الموقع</span>
+                                </a>
+                                <button type="button" class="btn btn-outline btn-sm" data-open-project="5">
+                                    <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+                                    <span data-i18n="projectDetails">تفاصيل المشروع</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====== Image Lightbox ====== -->
+        <div class="lightbox" id="image-lightbox" hidden>
+            <div class="lightbox-backdrop" data-close-lightbox></div>
+            <button type="button" class="lightbox-close" data-close-lightbox aria-label="إغلاق">
+                <i class="fas fa-xmark" aria-hidden="true"></i>
+            </button>
+            <img id="lightbox-image" alt="هديل" width="1200" height="1200">
+        </div>
+
+        <!-- ====== Project Details Modal ====== -->
+        <div class="modal" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+            <div class="modal-backdrop" data-close-modal></div>
+            <div class="modal-panel">
+                <button type="button" class="modal-close" data-close-modal aria-label="إغلاق">
+                    <i class="fas fa-xmark" aria-hidden="true"></i>
+                </button>
+                <div class="modal-media">
+                    <img id="modal-image" alt="" width="1200" height="700">
+                </div>
+                <div class="modal-body">
+                    <span class="modal-category" id="modal-category"></span>
+                    <h3 class="modal-title" id="modal-title"></h3>
+                    <p class="modal-desc" id="modal-desc"></p>
+                    <div class="modal-meta">
+                        <div class="meta-block">
+                            <h4 data-i18n="modalGoal">الهدف من المشروع</h4>
+                            <p id="modal-goal"></p>
+                        </div>
+                        <div class="meta-block">
+                            <h4 data-i18n="modalHighlights">أبرز عناصر التصميم</h4>
+                            <ul id="modal-highlights"></ul>
+                        </div>
+                        <div class="meta-block">
+                            <h4 data-i18n="modalTech">التقنيات المستخدمة</h4>
+                            <div class="modal-tech-list" id="modal-tech"></div>
+                        </div>
+                    </div>
+                    <a id="modal-link" class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                        <span data-i18n="visitSite">زيارة الموقع</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== About ====== -->
+        <section class="about" id="about">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-kicker" data-i18n="aboutKicker">نبذة</span>
+                    <h2 class="section-title"><span data-i18n="aboutTitle">من أنا</span> <span class="section-title-en" data-i18n="aboutTitleAlt">| About</span></h2>
+                </div>
+                <div class="about-grid">
+                    <div class="about-card glass-card">
+                        <div class="about-avatar">
+                            <img src="hadeel .jpeg" alt="صورة هديل الشخصية" width="200" height="200">
+                        </div>
+                        <div class="about-identity">
+                            <h3 class="about-name">هديل</h3>
+                            <span class="about-role" data-i18n="aboutRole">طالبة بكالوريوس الذكاء الاصطناعي • مبدعة في تصاميم الويب</span>
+                        </div>
+                        <p class="about-text" data-i18n="aboutText">أهتم بتصميم وتطوير المواقع الإلكترونية وحل المشكلات الرقمية. بحكم دراستي في الذكاء الاصطناعي، أبني واجهات تجمع بين جمال التفاصيل ووضوح الاستخدام، وأستمتع بتحويل الأفكار المعقدة إلى تجارب بسيطة وعملية يمكن للجميع استخدامها.</p>
+                        <ul class="about-highlights">
+                            <li><i class="fas fa-graduation-cap" aria-hidden="true"></i> <span data-i18n="aboutEdu">طالبة بكالوريوس الذكاء الاصطناعي</span></li>
+                            <li><i class="fas fa-desktop" aria-hidden="true"></i> <span data-i18n="aboutSkill1">تصميم وتطوير المواقع الإلكترونية</span></li>
+                            <li><i class="fas fa-lightbulb" aria-hidden="true"></i> <span data-i18n="aboutSkill2">حل المشكلات وتقديم حلول عملية</span></li>
+                            <li><i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i> <span data-i18n="aboutSkill3">مبدعة في تصاميم الويب</span></li>
+                        </ul>
+                    </div>
+                    <div class="about-card glass-card about-card-values">
+                        <div class="value-item">
+                            <i class="fas fa-palette" aria-hidden="true"></i>
+                            <div><h4 data-i18n="value1Title">الإبداع البصري</h4><p data-i18n="value1Desc">هوية بصرية متماسكة ولمسات فاخرة</p></div>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-user-check" aria-hidden="true"></i>
+                            <div><h4 data-i18n="value2Title">تجربة المستخدم</h4><p data-i18n="value2Desc">سهولة استخدام ووضوح في كل تفصيلة</p></div>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-code" aria-hidden="true"></i>
+                            <div><h4 data-i18n="value3Title">تطوير نظيف</h4><p data-i18n="value3Desc">كود خفيف وسريع وقابل للتطوير</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-showcase">
+                    <img src="hadeel22.jpeg" alt="هديل" class="about-showcase-img" data-lightbox="hadeel22.jpeg" loading="lazy" width="600" height="600">
+                </div>
+            </div>
+        </section>
+
+        <!-- ====== Skills ====== -->
+        <section class="skills" id="skills">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-kicker" data-i18n="skillsKicker">الأدوات</span>
+                    <h2 class="section-title"><span data-i18n="skillsTitle">المهارات والأدوات</span> <span class="section-title-en" data-i18n="skillsTitleAlt">| Skills</span></h2>
+                    <p class="section-desc" data-i18n="skillsDesc">تقنيات أؤكد استخدامها في مشاريعي — تُضاف وتُعدّل بسهولة من قائمة المهارات.</p>
+                </div>
+                <ul class="skills-grid">
+                    <li class="skill-item glass-card"><i class="fab fa-html5" aria-hidden="true"></i><span>HTML5</span></li>
+                    <li class="skill-item glass-card"><i class="fab fa-css3-alt" aria-hidden="true"></i><span>CSS3</span></li>
+                    <li class="skill-item glass-card"><i class="fab fa-js" aria-hidden="true"></i><span>JavaScript</span></li>
+                    <li class="skill-item glass-card"><i class="fab fa-3d" aria-hidden="true"></i><span>Three.js / WebGL</span></li>
+                    <li class="skill-item glass-card"><i class="fas fa-chart-simple" aria-hidden="true"></i><span>D3.js</span></li>
+                    <li class="skill-item glass-card"><i class="fas fa-mobile-screen" aria-hidden="true"></i><span data-i18n="skillResponsive">تصميم متجاوب</span></li>
+                    <li class="skill-item glass-card"><i class="fas fa-universal-access" aria-hidden="true"></i><span>Accessibility</span></li>
+                    <li class="skill-item glass-card"><i class="fas fa-language" aria-hidden="true"></i><span data-i18n="skillBilingual">واجهات ثنائية اللغة</span></li>
+                    <li class="skill-item glass-card"><i class="fas fa-bolt" aria-hidden="true"></i><span data-i18n="skillPerformance">تحسين الأداء</span></li>
+                    <li class="skill-item glass-card"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>WhatsApp API</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ====== Process ====== -->
+        <section class="process" id="process">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-kicker" data-i18n="processKicker">المنهجية</span>
+                    <h2 class="section-title"><span data-i18n="processTitle">طريقة العمل</span> <span class="section-title-en" data-i18n="processTitleAlt">| My Process</span></h2>
+                </div>
+                <ol class="process-steps">
+                    <li class="process-step glass-card">
+                        <span class="step-num">01</span>
+                        <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                        <h4 data-i18n="step1Title">فهم الفكرة</h4>
+                        <p data-i18n="step1Desc">استماع دقيق لأهداف المشروع وجمهوره</p>
+                    </li>
+                    <li class="process-step glass-card">
+                        <span class="step-num">02</span>
+                        <i class="fas fa-clipboard-list" aria-hidden="true"></i>
+                        <h4 data-i18n="step2Title">التخطيط</h4>
+                        <p data-i18n="step2Desc">هيكلة المحتوى وخارطة الصفحات</p>
+                    </li>
+                    <li class="process-step glass-card">
+                        <span class="step-num">03</span>
+                        <i class="fas fa-pen-ruler" aria-hidden="true"></i>
+                        <h4 data-i18n="step3Title">التصميم</h4>
+                        <p data-i18n="step3Desc">هوية بصرية فاخرة وواجهات أنيقة</p>
+                    </li>
+                    <li class="process-step glass-card">
+                        <span class="step-num">04</span>
+                        <i class="fas fa-code" aria-hidden="true"></i>
+                        <h4 data-i18n="step4Title">التطوير</h4>
+                        <p data-i18n="step4Desc">كود نظيف وتفاعلات سلسة</p>
+                    </li>
+                    <li class="process-step glass-card">
+                        <span class="step-num">05</span>
+                        <i class="fas fa-vial-circle-check" aria-hidden="true"></i>
+                        <h4 data-i18n="step5Title">الاختبار</h4>
+                        <p data-i18n="step5Desc">تجربة على الأجهزة وإصلاح الملاحظات</p>
+                    </li>
+                    <li class="process-step glass-card">
+                        <span class="step-num">06</span>
+                        <i class="fas fa-rocket" aria-hidden="true"></i>
+                        <h4 data-i18n="step6Title">الإطلاق</h4>
+                        <p data-i18n="step6Desc">نشر الموقع ومتابعة الأداء</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ====== Contact ====== -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <div class="contact-panel glass-card">
+                    <span class="section-kicker" data-i18n="contactKicker">تواصل</span>
+                    <h2 class="contact-title" data-i18n="contactTitle">هل لديك فكرة تستحق أن ترى النور؟</h2>
+                    <p class="contact-desc" data-i18n="contactDesc">أخبرني بفكرتك وسأعود إليك لمناقشة التصميم والتطوير.</p>
+                    <div class="contact-actions">
+                        <a href="https://wa.me/966557123774" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                            <span data-i18n="contactWhatsApp">تواصل عبر واتساب</span>
+                            <span class="contact-num" dir="ltr">0557123774</span>
+                        </a>
+                        <a href="https://wa.me/966533341173" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-lg">
+                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                            <span data-i18n="contactWhatsApp2">رقم الإدارة</span>
+                            <span class="contact-num" dir="ltr">0533341173</span>
+                        </a>
+                        <a href="mailto:lcf277940@gmail.com" class="btn btn-outline btn-lg">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                            <span data-i18n="contactEmail">البريد الإلكتروني</span>
+                            <span class="contact-num" dir="ltr">lcf277940@gmail.com</span>
+                        </a>
+                    </div>
+                    <p class="contact-note"><i class="fas fa-circle-info" aria-hidden="true"></i> <span data-i18n="contactNote">البريد الإلكتروني: lcf277940@gmail.com</span></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ====== Footer ====== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <span class="logo-icon logo-photo logo-transparent">
+                        <img src="hadeel1.png" alt="هديل — شعار" width="56" height="56">
+                    </span>
+                    <p data-i18n="footerText">معرض أعمال يجمع بين الفخامة الملكية، والأناقة الراقية، والإبداع المتميز.</p>
+                </div>
+                <nav class="footer-links" aria-label="روابط التذييل">
+                    <a href="#portfolio" data-i18n="navWorks">أعمال مختارة</a>
+                    <a href="#about" data-i18n="navAbout">من أنا</a>
+                    <a href="#skills" data-i18n="navSkills">المهارات</a>
+                    <a href="#process" data-i18n="navProcess">طريقة العمل</a>
+                    <a href="#contact" data-i18n="navContact">تواصل</a>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    <img src="hadeel1.png" alt="هديل" width="28" height="28" class="footer-logo">
+                    <span data-i18n="footerRights">© 2026 — جميع الحقوق محفوظة</span>
+                    <span>— هديل</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scroll-top" type="button" aria-label="العودة إلى الأعلى">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- ====== نافذة تكبير الشعار ====== -->
+    <div class="modal logo-modal" id="logo-modal" role="dialog" aria-modal="true" aria-label="شعار هديل" hidden>
+        <div class="modal-backdrop" data-close-logo></div>
+        <div class="modal-panel logo-modal-panel">
+            <button type="button" class="modal-close" data-close-logo aria-label="إغلاق">
+                <i class="fas fa-xmark" aria-hidden="true"></i>
+            </button>
+            <img src="hadeel1.png" alt="هديل — شعار بخلفية شفافة" class="logo-modal-img">
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
